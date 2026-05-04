@@ -65,6 +65,11 @@ class DatabaseManager extends BaseDatabaseManager
         $expiresIn = now()->addSeconds(30);
         $backupExpiresIn = now()->addHours(12);
 
+        if (empty(request()->uniqueVar) == false) {
+            $cacheKey .="_".request()->uniqueVar;
+            $cacheKeyBackUp .="_".request()->uniqueVar;
+        }
+
         //check if config is in cache
         if (Cache::has($cacheKey)) {
             //get from cache
